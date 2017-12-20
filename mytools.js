@@ -30,3 +30,21 @@ $("#cotComprobante").change(function(){
     document.getElementById("colBoleto").value = "";
   }
 });
+
+
+//Comparación de fechas - ESTE APLICA PARA QUE FECHA DADA NO SEA MAYOR A HOY
+function compareDates(){
+  //Fecha de hoy
+  var date = new Date();
+  var hoy = date.getTime();
+
+  //Tomar el string de la fecha y pasarlo separado FUNCIONA PARA TODOS LOS BROWSERS
+  var xvals = comFecha.split('-');
+  //Pasar año - mes - día
+  var date2 = new Date(
+    parseInt(xvals[2]),
+    parseInt(xvals[1]) - 1,
+    parseInt(xvals[0])
+  );
+  var fecha = date2.getTime();
+}
