@@ -213,3 +213,63 @@ $('#btnBuscarAsociarGasto').click(function(e){
   e.preventDefault();
   return false;
 });
+
+
+//Elimina un contacto de la tabla
+function deleteContactoRendicion(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+
+
+//Agregar los contactos de rendición para organismo
+function agregarContactoRendicion(){
+  //Capturar valores
+  var recNombre = document.getElementById("recNombre").value;
+  var recEmail = document.getElementById("recEmail").value;
+  var recTipo = document.querySelector("select#recTipo").value;console.log("rectipo "+recTipo);
+  var lastRow = document.getElementById("lastRow").value;
+  //Validaciones
+  if(recNombre == ""){
+    alert("Indique el nombre");
+    return false;
+  }
+  if(recEmail == ""){
+    alert("Indique el correo");
+    return false;
+  }
+  if(recTipo == ""){
+    alert("Indique el tipo de contacto");
+    return false;
+  }
+  //Obtener información de la tabla
+  var table = document.querySelector("#tableContactosAgregados tbody");
+  var cantRows = lastRow+1;
+  document.getElementById("lastRow").value = cantRows;
+  //Tipo de contacto
+  switch(recTipo) {
+    case "A":
+      var tipo = '<span class="label label-success">Ambos</span>';
+      break;
+    case "R":
+      var tipo = '<span class="label label-default">Rendiciones</span>';
+      break;
+    case "L":
+      var tipo = '<span class="label label-warning">Liquidaciones</span>';
+      break;
+  }
+  //Imprimir información en la tabla
+  var newRow = '<td>'+recNombre+'</td>' +
+    '<td>'+recEmail+'</td>' +
+    '<td>'+tipo+'</td>' +
+    '<td><a href="javascript:void(0)" onClick="deleteContactoRendicion(this)" class="table-link danger" title="Eliminar cuenta">' +
+    '   <span class="fa-stack">' +
+    '     <i class="fa fa-square fa-stack-2x"></i>' +
+    '     <i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>' +
+    '   </span>' +
+    ' </a></td>';
+  var tr = document.createElement("tr");
+  tr.innerHTML = newRow;
+  table.appendChild(tr);
+  tr.setAttribute("id", cantRows+1);
+}
