@@ -229,6 +229,9 @@ function agregarContactoRendicion(){
   var recEmail = document.getElementById("recEmail").value;
   var recTipo = document.querySelector("select#recTipo").value;console.log("rectipo "+recTipo);
   var lastRow = document.getElementById("lastRow").value;
+  //Varibale para verificar correo correcto
+  var rege = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
   //Validaciones
   if(recNombre == ""){
     alert("Indique el nombre");
@@ -240,6 +243,10 @@ function agregarContactoRendicion(){
   }
   if(recTipo == ""){
     alert("Indique el tipo de contacto");
+    return false;
+  }
+  if (!(rege.test(recEmail))){
+    alert("Indique un correo válido");
     return false;
   }
   //Obtener información de la tabla
